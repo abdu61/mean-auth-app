@@ -1,10 +1,27 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AuthService } from '../service/auth.service';
+import { User } from '../model/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
-  imports: [CommonModule],
   templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css',
+  styleUrls: ['./signin.component.css'],
 })
-export class SigninComponent {}
+export class SigninComponent {
+  user: User = { email: '', password: '' };
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  onSubmit() {
+    this.authService.login(this.user).subscribe({
+      next: (data) => {
+        localStorage.setItem('access_token', data.access_token);
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+}
