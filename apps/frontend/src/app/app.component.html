@@ -1,2 +1,9 @@
-<app-nx-welcome></app-nx-welcome>
-<router-outlet></router-outlet>
+<nav>
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li *ngIf="!isAuthenticated"><a routerLink="/signup">Sign Up</a></li>
+      <li *ngIf="!isAuthenticated"><a routerLink="/signin">Sign In</a></li>
+      <li *ngIf="isAuthenticated"><button (click)="onLogout()">Logout</button></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>

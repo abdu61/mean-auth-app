@@ -1,13 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as AuthActions from './state/auth.actions';
+import { AuthState } from './state/auth.reducer';
+import * as AuthSelectors from './state/auth.selectors';
 
 @Component({
-  imports: [NxWelcomeComponent, RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'frontend';
+  isAuthenticated: Observable<boolean>;
+
+  constructor(private store: Store<AuthState>) {
+    this.isAuthenticated = this.store.select(AuthSelectors.selectIsAuthenticated);
+  }
+
+  onLogout() {
+    this.store.dispatch(AuthActions.logout());
+  }
 }
