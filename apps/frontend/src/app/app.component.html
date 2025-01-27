@@ -1,9 +1,9 @@
 <nav>
     <ul>
       <li><a routerLink="/">Home</a></li>
-      <li *ngIf="!isAuthenticated"><a routerLink="/signup">Sign Up</a></li>
-      <li *ngIf="!isAuthenticated"><a routerLink="/signin">Sign In</a></li>
-      <li *ngIf="isAuthenticated"><button (click)="onLogout()">Logout</button></li>
+      <li @If="(isAuthenticated | async) === false"><a routerLink="/signup">Sign Up</a></li>
+      <li @If="(isAuthenticated | async) === false"><a routerLink="/signin">Sign In</a></li>
+      <li @If="isAuthenticated | async"><button (click)="onLogout()">Logout</button></li>
     </ul>
   </nav>
   <router-outlet></router-outlet>

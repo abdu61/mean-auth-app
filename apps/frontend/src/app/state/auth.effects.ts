@@ -8,6 +8,12 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   signup$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.signup),
@@ -55,10 +61,5 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router
-  ) {}
 }
+export const authEffects = [AuthEffects];

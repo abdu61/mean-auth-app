@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(''),
+    MongooseModule.forRoot(''), // Add your MongoDB connection string here
     AuthModule,
   ],
   controllers: [AppController],

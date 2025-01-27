@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-//import { AuthService } from '../service/auth.service';
-import { User } from '../model/user.model';
-//import { Router } from '@angular/router';
-import { AuthState } from '../state/auth.reducer';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
+import { User } from '../model/user.model';
 import * as AuthActions from '../state/auth.actions';
+import { AuthState } from '../state/auth.reducer';
 
 @Component({
   selector: 'app-signin',
+  standalone: true,
+  imports: [FormsModule, CommonModule], // Add FormsModule and CommonModule to imports
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
@@ -19,6 +21,7 @@ export class SigninComponent {
   onSubmit() {
     this.store.dispatch(AuthActions.signin({ user: this.user }));
   }
+}
   // user: User = { email: '', password: '' };
 
   // constructor(private authService: AuthService, private router: Router) {}
@@ -34,4 +37,3 @@ export class SigninComponent {
   //     },
   //   });
   // }
-}

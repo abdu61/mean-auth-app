@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { CommonModule } from '@angular/common';
-import { User } from '../model/user.model';
-import { AuthState } from '../state/auth.reducer';
 import { Store } from '@ngrx/store';
+import { User } from '../model/user.model';
 import * as AuthActions from '../state/auth.actions';
+import { AuthState } from '../state/auth.reducer';
 
 @Component({
   selector: 'app-signup',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [FormsModule, CommonModule], // Add FormsModule and CommonModule to imports
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css',
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
   user: User = { email: '', password: '' };
